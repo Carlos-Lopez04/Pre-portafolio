@@ -61,10 +61,28 @@ def fahrenheit_celsius():
 f'{fahrenheit} Fahrenheit degree are {round(celsius,1)} Celsius degree')
 
 def miles_km():
-    pass
+    # Asking a number to convert
+    miles = sd.askfloat('Converter',
+'Introduce the miles to convert')
+    
+    # Formula to convert
+    km = miles * 1.60934
+
+    # Showing the result
+    mb.showinfo('Converter',
+f'{miles} miles are {round(km,3)} km')
 
 def km_miles():
-    pass
+    # Asking a number to convert
+    km = sd.askfloat('Converter',
+'Introduce the miles to convert')
+    
+    # Formula to convert
+    miles = km * 0.621371
+
+    # Showing the result
+    mb.showinfo('Converter',
+f'{km} km are {round(miles,3)} miles')
 
 if __name__ == '__main__':
     menu()
