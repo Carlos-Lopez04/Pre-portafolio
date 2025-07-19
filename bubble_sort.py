@@ -35,6 +35,30 @@ def v2():
     print(f"\nLista ordenada 2 -> {l}\n")
 
 
+def v3(lst):
+    n = len(lst)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+
 if __name__ == "__main__":
-    v1()
-    v2()
+    # v1()
+    # print("==============================")
+    # v2()
+    # print("==============================")
+    # Ejemplos de uso:
+    lista1 = [64, 34, 25, 12, 22, 11, 90]
+    lista2 = [5, 1, 4, 2, 8]
+    lista3 = [3, 0, 2, 5, -1, 4, 1]
+
+    # Ordenar y mostrar resultados
+    print("Lista 1 (original):", lista1)
+    print("Lista 1 (ordenada):", v3(lista1.copy()))
+    # Usamos .copy() para no modificar la original
+    print("\nLista 2 (original):", lista2)
+    print("Lista 2 (ordenada):", v3(lista2.copy()))
+    print("\nLista 3 (original):", lista3)
+    print("Lista 3 (ordenada):", v3(lista3.copy()))
