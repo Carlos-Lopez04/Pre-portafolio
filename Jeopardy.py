@@ -98,9 +98,9 @@ initialize_fonts()
 # Datos del juego
 categories = [
     "Fundamentos de modelos",
-    "Triple hélice",
-    "Cuadruple hélice",
-    "Quintuple hélice",
+    "Triple helice",
+    "Cuadruple helice",
+    "Quintuple helice",
     "Clusters",
     "Fundamentos de Clusters",
 ]
@@ -130,7 +130,7 @@ questions_data = {
             "answer": "Porque involucra interacciones dinámicas y retroalimentación entre múltiples actores",
         },
     ],
-    "Tripe hélice": [
+    "Triple helice": [
         {
             "question": "Nombra los tres actores del modelo de Triple Hélice.",
             "answer": "Universidad, industria, gobierno.",
@@ -152,7 +152,7 @@ questions_data = {
             "answer": "Horizonte 2020",
         },
     ],
-    "Cuadrupe hélice": [
+    "Cuadruple helice": [
         {
             "question": "¿Qué actor se añade en el modelo de Cuádruple Hélice?", 
             "answer": "La sociedad civil"
@@ -174,7 +174,7 @@ questions_data = {
             "answer": "Mayor complejidad en la coordinación entre actores.",
         },
     ],
-    "Quintuple hélice": [
+    "Quintuple helice": [
         {
             "question": "¿Qué actor se incorpora en el modelo de Quíntuple Hélice?", 
             "answer": "El medio ambiente."
