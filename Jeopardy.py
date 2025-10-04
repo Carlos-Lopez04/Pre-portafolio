@@ -7,7 +7,7 @@ import time  # Añadir esta importación
 pygame.init()
 
 # Configuración de la pantalla (ahora con dimensiones iniciales)
-INITIAL_WIDTH, INITIAL_HEIGHT = 1200, 920
+INITIAL_WIDTH, INITIAL_HEIGHT = 1200, 700
 screen = pygame.display.set_mode((INITIAL_WIDTH, INITIAL_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption("Jeopardy Game")
 
@@ -28,6 +28,7 @@ PURPLE = (156, 39, 176)
 TEAL = (0, 150, 136)
 PINK = (233, 30, 99)
 YELLOW = (255, 235, 59)
+GRAY = (128, 128, 128)
 
 # CONFIGURACIÓN DE TAMAÑOS (PARÁMETROS MODIFICABLES)
 SIZE_CONFIG = {
@@ -96,132 +97,147 @@ initialize_fonts()
 
 # Datos del juego
 categories = [
-    "EDIBLE RHYME TIME",
-    "BOOKS IN GERMAN",
-    "3 Ts",
-    "CHOP CHOP!",
-    "THEY SAID IT WOULDN'T LAST",
-    "THEY WERE RIGHT",
+    "Fundamentos de modelos",
+    "Triple hélice",
+    "Cuadruple hélice",
+    "Quintuple hélice",
+    "Clusters",
+    "Fundamentos de Clusters",
 ]
 question_values = [200, 400, 600, 800, 1000]
 
 # Preguntas y respuestas (igual que antes)
 questions_data = {
-    "EDIBLE RHYME TIME": [
+    "Fundamentos de modelos": [
         {
-            "question": "Este alimento redondo y plano suena como un tipo de sombrero",
-            "answer": "Tortilla (tortilla/tortilla)",
+            "question": "¿Qué es un sistema de innovación?",
+            "answer": "Conjunto de instituciones, actores y relaciones que facilitan la generación y aplicación de conocimiento.",
         },
         {
-            "question": "Esta fruta amarilla suena como lo que haces cuando ves algo gracioso",
-            "answer": "Plátano (banana/risa)",
+            "question": "¿Qué supera el concepto de sistemas de innovación?",
+            "answer": "Al modelo lineal de innovación",
         },
         {
-            "question": "Este vegetal verde suena como un tipo de baile",
-            "answer": "Apio (celery/selería)",
+            "question": "Elemento clave para la formación de clusters según el marco teórico.",
+            "answer": "La proximidad geográfica y social.",
         },
         {
-            "question": "Este postre congelado suena como lo que haces cuando tienes frío",
-            "answer": "Helado (ice cream/temblar)",
+            "question": "¿Qué tipo de instituciones surgen de la interacción entre actores en los sistemas de innovación?",
+            "answer": "Instituciones híbridas.",
         },
         {
-            "question": "Este alimento marino suena como lo que haces cuando estás feliz",
-            "answer": "Cangrejo (crab/saltar)",
-        },
-    ],
-    "BOOKS IN GERMAN": [
-        {
-            "question": "Este famoso libro de Goethe comienza con 'Wer reitet so spät durch Nacht und Wind?'",
-            "answer": "Erlkönig",
-        },
-        {
-            "question": "Novela de Hermann Hesse sobre la búsqueda espiritual de un hombre llamado Siddhartha",
-            "answer": "Siddhartha",
-        },
-        {
-            "question": "Obra de Kafka donde el protagonista se despierta convertido en un insecto",
-            "answer": "La metamorfosis",
-        },
-        {
-            "question": "Famoso libro infantil de Erich Kästner sobre una niña con poderes especiales",
-            "answer": "Pünktchen und Anton",
-        },
-        {
-            "question": "Novela de Thomas Mann sobre la decadencia de una familia de comerciantes",
-            "answer": "Los Buddenbrook",
+            "question": "¿Por qué se dice que la innovación es un proceso no lineal?",
+            "answer": "Porque involucra interacciones dinámicas y retroalimentación entre múltiples actores",
         },
     ],
-    "3 Ts": [
-        {"question": "País europeo cuya capital es Budapest", "answer": "Hungría"},
-        {"question": "Instrumento musical de cuerda con trastes", "answer": "Guitarra"},
-        {"question": "Capital de Japón", "answer": "Tokio"},
+    "Tripe hélice": [
         {
-            "question": "En matemáticas, razón entre el lado opuesto y el lado adyacente en un triángulo rectángulo",
-            "answer": "Tangente",
+            "question": "Nombra los tres actores del modelo de Triple Hélice.",
+            "answer": "Universidad, industria, gobierno.",
         },
         {
-            "question": "Proceso de cocción a alta temperatura en un horno",
-            "answer": "Tostar",
-        },
-    ],
-    "CHOP CHOP!": [
-        {"question": "Acción de cortar leña con un hacha", "answer": "Talar"},
-        {"question": "Utensilio de cocina para picar alimentos", "answer": "Cuchillo"},
-        {
-            "question": "Estilo de cocina donde los alimentos se cortan en trozos pequeños y se saltean rápidamente",
-            "answer": "Stir-fry",
+            "question": "¿Quiénes propusieron originalmente el modelo de Triple Hélice?",
+            "answer": "Etzkowitz y Leydesdorff",
         },
         {
-            "question": "Técnica culinaria de cortar verduras en cubos pequeños",
-            "answer": "Brunoise",
+            "question": "Menciona un ejemplo de institución híbrida en este modelo",
+            "answer": "Parques científicos / Oficinas de transferencia tecnológica.",
         },
         {
-            "question": "Término para cortar alimentos en tiras finas",
-            "answer": "Juliana",
+            "question": "¿Qué papel juega la universidad en la Triple Hélice?",
+            "answer": "Aporta conocimiento y capital humano",
+        },
+        {
+            "question": "¿En qué programa de la Unión Europea se aplica el modelo de Triple Hélice?",
+            "answer": "Horizonte 2020",
         },
     ],
-    "THEY SAID IT WOULDN'T LAST": [
+    "Cuadrupe hélice": [
         {
-            "question": "Esta pareja de actores se casó en 1954 y permanecieron juntos hasta la muerte de él en 2017",
-            "answer": "Kirk Douglas y Anne Buydens",
+            "question": "¿Qué actor se añade en el modelo de Cuádruple Hélice?", 
+            "answer": "La sociedad civil"
+            },
+        {
+            "question": "Menciona una ventaja de incluir a la sociedad civil en la innovación.", 
+            "answer": "Mayor legitimidad y aceptación social."
+            },
+        {
+            "question": "¿Qué tipo de innovación promueve la Cuádruple Hélice?", 
+            "answer": "Innovación social / orientada a la demanda."
+            },
+        {
+            "question": "¿En qué proyecto participa la sociedad civil y en donde?",
+            "answer": "Proyecto Smart Citizen en Barcelona.",
         },
         {
-            "question": "Este invento de 1903 fue predicho que nunca volaría",
-            "answer": "El avión",
-        },
-        {
-            "question": "Esta banda británica formada en 1960 sigue activa hoy en día",
-            "answer": "The Rolling Stones",
-        },
-        {
-            "question": "Este programa de televisión comenzó en 1975 y todavía se transmite",
-            "answer": "Saturday Night Live",
-        },
-        {
-            "question": "Esta tecnología de 1983 fue considerada un fracaso inicialmente",
-            "answer": "El teléfono móvil",
+            "question": "¿Cuál es una limitación del modelo de Cuádruple Hélice?",
+            "answer": "Mayor complejidad en la coordinación entre actores.",
         },
     ],
-    "THEY WERE RIGHT": [
+    "Quintuple hélice": [
         {
-            "question": "Este barco 'insumergible' se hundió en su viaje inaugural en 1912",
-            "answer": "Titanic",
+            "question": "¿Qué actor se incorpora en el modelo de Quíntuple Hélice?", 
+            "answer": "El medio ambiente."
+            },
+        {
+            "question": "¿Qué desafíos globales busca enfrentar este modelo?", 
+            "answer": "Cambio climático, pérdida de biodiversidad, transición a economías verdes"
+            },
+        {
+            "question": "Menciona un mecanismo para implementar la Quíntuple Hélice.",
+            "answer": "Mesas de diálogo / Proyectos colaborativos / Plataformas digitales.",
         },
         {
-            "question": "Esta burbuja económica estalló en 2000 afectando a las empresas tecnológicas",
-            "answer": "Burbuja de las puntocom",
+            "question": "¿Qué papel juega el gobierno en este modelo?",
+            "answer": "Diseñar políticas y regular a favor del desarrollo sostenible.",
         },
         {
-            "question": "Este muro construido en 1961 cayó en 1989",
-            "answer": "Muro de Berlín",
+            "question": "Da un ejemplo internacional donde se aplique este modelo y en que lugar.",
+            "answer": "Eco-innovación en Europa / Alianzas para los ODS",
+        },
+    ],
+    "Clusters": [
+        {
+            "question": "¿Qué es un cluster?",
+            "answer": "Concentración geográfica de empresas e instituciones interconectadas.",
         },
         {
-            "question": "Este imperio colapsó en 1991 después de décadas de predicciones",
-            "answer": "Unión Soviética",
+            "question": "Nombra el cluster tecnológico más famoso de Estados Unidos.",
+            "answer": "Silicon Valley",
         },
         {
-            "question": "Esta teoría económica fue desacreditada durante la Gran Depresión",
-            "answer": "Teoría del goteo (Trickle-down economics)",
+            "question": "Menciona un cluster especializado en biotecnología",
+            "answer": "Boston",
+        },
+        {
+            "question": "¿Qué autor definió el concepto moderno de cluster?",
+            "answer": "Michael Porter",
+        },
+        {
+            "question": "¿Cuáles son las tres vías de impacto que señaló Porter para los clusters?",
+            "answer": "Incremento de la productividad, dirección y velocidad de la innovación, y creación de nuevas empresas",
+        },
+    ],
+    "Fundamentos de Clusters": [
+        {
+            "question": "¿Quién introdujo la idea original de distritos industriales?",
+            "answer": "Alfred Marshall.",
+        },
+        {
+            "question": "¿Qué concepto económico se asocia con la concentración espacial de empresas?",
+            "answer": "Economías de aglomeración.",
+        },
+        {
+            "question": "Menciona un factor crítico para el éxito de un cluster según Porter.",
+            "answer": "Demanda sofisticada / Rivalidad empresarial / Industrias de soporte",
+        },
+        {
+            "question": "¿Qué institución internacional enfatiza la integración de clusters en cadenas de valor sostenibles?",
+            "answer": "UNIDO",
+        },
+        {
+            "question": "Según Big Think (2024), ¿de qué depende la innovación en un cluster?",
+            "answer": "De la interacción social, cultural y académica, no del “genio solitario”",
         },
     ],
 }
@@ -369,21 +385,24 @@ class Button:
         return self.rect.collidepoint(pos)
 
 
-# Crear botones
+# Crear botones - CENTRADOS DENTRO DEL MARGEN DE LA VENTANA DE PREGUNTA
 show_answer_button = Button(
-    0.25, 0.85, 0.15, 0.07, "Mostrar Respuesta", GREEN, (100, 200, 100)
+    0.22, 0.85, 0.15, 0.07, "Mostrar Respuesta", GREEN, (100, 200, 100)
 )
 assign_points_button = Button(
-    0.45, 0.85, 0.15, 0.07, "Asignar Puntos", ORANGE, (255, 180, 0)
+    0.42, 0.85, 0.15, 0.07, "Asignar Puntos", ORANGE, (255, 180, 0)
 )
-close_modal_button = Button(0.65, 0.85, 0.15, 0.07, "Cerrar", RED, (200, 100, 100))
+no_points_button = Button(0.62, 0.85, 0.15, 0.07, "Sin Puntos", GRAY, (100, 100, 100))
+
+# Botones para el modo de asignación de puntos
 assign_to_current_button = Button(
-    0.15, 0.85, 0.15, 0.07, "Correcto (+)", GREEN, (100, 200, 100)
+    0.22, 0.85, 0.15, 0.07, "Correcto (+)", GREEN, (100, 200, 100)
 )
 assign_to_other_button = Button(
-    0.35, 0.85, 0.15, 0.07, "Otro Equipo", BLUE_LIGHT, (100, 150, 255)
+    0.42, 0.85, 0.15, 0.07, "Otro Equipo", BLUE_LIGHT, (100, 150, 255)
 )
-cancel_assign_button = Button(0.55, 0.85, 0.15, 0.07, "Cancelar", RED, (200, 100, 100))
+cancel_assign_button = Button(0.62, 0.85, 0.15, 0.07, "Cancelar", RED, (200, 100, 100))
+
 menu_button = Button(0.02, 0.02, 0.08, 0.04, "MENÚ", PURPLE, (180, 60, 200))
 
 # Botones del menú
@@ -419,7 +438,7 @@ for i in range(7):
 def update_button_positions():
     show_answer_button.update_position()
     assign_points_button.update_position()
-    close_modal_button.update_position()
+    no_points_button.update_position()
     assign_to_current_button.update_position()
     assign_to_other_button.update_position()
     cancel_assign_button.update_position()
@@ -733,10 +752,10 @@ def draw_question():
             )
 
     if not assigning_points:
-        # Mostrar botones normales: Mostrar Respuesta, Asignar Puntos y Cerrar
+        # Mostrar solo los 3 botones centrados dentro del margen de la ventana
         show_answer_button.draw(screen)
         assign_points_button.draw(screen)
-        close_modal_button.draw(screen)
+        no_points_button.draw(screen)
     else:
         # Modo de asignación de puntos - Mostrar solo la interfaz de asignación
         instruction_text = "¿Quién respondió correctamente?"
@@ -761,6 +780,10 @@ def assign_points(team_index):
     print(
         f"Puntos asignados a {selected_teams[team_index]}: +${current_question_value}"
     )
+
+
+def no_points():
+    print(f"Ningún equipo recibió puntos por esta pregunta (${current_question_value})")
 
 
 def close_question_modal():
@@ -845,71 +868,55 @@ def main():
             if not assigning_points:
                 show_answer_button.check_hover(mouse_pos)
                 assign_points_button.check_hover(mouse_pos)
-                close_modal_button.check_hover(mouse_pos)
+                no_points_button.check_hover(mouse_pos)
             else:
-                if game_state == "assign_points":
-                    assign_to_current_button.check_hover(mouse_pos)
-                    assign_to_other_button.check_hover(mouse_pos)
-                    cancel_assign_button.check_hover(mouse_pos)
-                elif game_state == "select_team":
+                assign_to_current_button.check_hover(mouse_pos)
+                assign_to_other_button.check_hover(mouse_pos)
+                cancel_assign_button.check_hover(mouse_pos)
+                if game_state == "select_team":
                     for button in team_buttons:
                         button.check_hover(mouse_pos)
-                    cancel_assign_button.check_hover(mouse_pos)
-
-        # Verificar si el temporizador ha terminado
-        if timer_active and game_state in ["question", "answer"]:
-            elapsed_time = time.time() - question_start_time
-            if elapsed_time >= timer_duration:
-                # El tiempo se agotó, detener el temporizador pero no mostrar la respuesta
-                timer_active = False
-                time_expired = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.VIDEORESIZE:
+            elif event.type == pygame.VIDEORESIZE:
                 WIDTH, HEIGHT = event.size
                 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
                 initialize_fonts()
                 calculate_dimensions()
                 update_button_positions()
 
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if game_state == "board":
-                    if menu_button.is_clicked(mouse_pos):
-                        show_menu = not show_menu
-
-                    elif show_menu:
-                        if reset_scores_button.is_clicked(mouse_pos):
-                            team_scores = [0] * 7
-                            print("Puntuaciones reiniciadas")
-                            show_menu = False
-
-                        elif reset_game_button.is_clicked(mouse_pos):
-                            team_scores = [0] * 7
-                            used_questions = {}
-                            current_question = None
-                            show_answer = False
-                            game_state = "board"
-                            current_turn = 0
-                            timer_active = False
-                            time_expired = False
-                            print("Juego reiniciado")
-                            show_menu = False
-
-                        elif next_turn_button.is_clicked(mouse_pos):
-                            next_turn()
-                            print(f"Turno cambiado a: {selected_teams[current_turn]}")
-                            show_menu = False
-
-                        elif close_menu_button.is_clicked(mouse_pos):
-                            show_menu = False
-
-                    else:
-                        handle_board_click(mouse_pos)
-
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if menu_button.is_clicked(mouse_pos):
+                    show_menu = not show_menu
+                elif show_menu:
+                    if reset_scores_button.is_clicked(mouse_pos):
+                        team_scores = [0] * 7
+                        print("Puntuaciones reiniciadas")
+                        show_menu = False
+                    elif reset_game_button.is_clicked(mouse_pos):
+                        team_scores = [0] * 7
+                        used_questions = {}
+                        current_question = None
+                        current_turn = 0
+                        selected_teams = random.sample(team_names, 7)
+                        print("Juego reiniciado")
+                        print("Nuevos equipos seleccionados:")
+                        for i, team in enumerate(selected_teams):
+                            print(f"Equipo {i+1}: {team}")
+                        print(f"Comienza el equipo: {selected_teams[current_turn]}\n")
+                        show_menu = False
+                    elif next_turn_button.is_clicked(mouse_pos):
+                        next_turn()
+                        print(f"Turno cambiado a: {selected_teams[current_turn]}")
+                        show_menu = False
+                    elif close_menu_button.is_clicked(mouse_pos):
+                        show_menu = False
+                elif game_state == "board":
+                    handle_board_click(mouse_pos)
                 elif game_state in [
                     "question",
                     "answer",
@@ -920,46 +927,41 @@ def main():
                         if show_answer_button.is_clicked(mouse_pos):
                             show_answer = True
                             game_state = "answer"
-
                         elif assign_points_button.is_clicked(mouse_pos):
                             assigning_points = True
                             game_state = "assign_points"
-
-                        elif close_modal_button.is_clicked(mouse_pos):
+                        elif no_points_button.is_clicked(mouse_pos):
+                            no_points()
                             close_question_modal()
-
                     else:
-                        if game_state == "assign_points":
-                            if assign_to_current_button.is_clicked(mouse_pos):
-                                assign_points(current_turn)
-                                close_question_modal()
-
-                            elif assign_to_other_button.is_clicked(mouse_pos):
-                                game_state = "select_team"
-
-                            elif cancel_assign_button.is_clicked(mouse_pos):
-                                assigning_points = False
-                                game_state = "question"
-
+                        if assign_to_current_button.is_clicked(mouse_pos):
+                            assign_points(current_turn)
+                            close_question_modal()
+                        elif assign_to_other_button.is_clicked(mouse_pos):
+                            game_state = "select_team"
+                        elif cancel_assign_button.is_clicked(mouse_pos):
+                            assigning_points = False
+                            game_state = "question"
                         elif game_state == "select_team":
-                            team_selected = False
                             for i, button in enumerate(team_buttons):
                                 if button.is_clicked(mouse_pos):
                                     assign_points(i)
-                                    team_selected = True
+                                    close_question_modal()
                                     break
 
-                            if team_selected:
-                                close_question_modal()
-                            elif cancel_assign_button.is_clicked(mouse_pos):
-                                game_state = "assign_points"
+        # Verificar temporizador
+        if timer_active and not time_expired:
+            elapsed_time = time.time() - question_start_time
+            if elapsed_time >= timer_duration:
+                time_expired = True
+                timer_active = False
+                print("¡Tiempo agotado!")
 
         screen.fill(BLUE_DARK)
 
         if game_state == "board":
             draw_board()
         elif game_state in ["question", "answer", "assign_points", "select_team"]:
-            draw_board()
             draw_question()
 
         pygame.display.flip()
