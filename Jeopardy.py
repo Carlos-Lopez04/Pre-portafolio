@@ -66,13 +66,14 @@ value_font = None
 modal_font = None
 button_font = None
 score_font = None
-team_font = None
+team_font = None  # Fuente para nombres de equipos (sin negrita)
+team_bold_font = None  # NUEVA: Fuente para nombres de equipos en negrita
 turn_font = None
 
 
 # Función para inicializar fuentes según el tamaño actual
 def initialize_fonts():
-    global title_font, category_font, value_font, modal_font, button_font, score_font, team_font, turn_font
+    global title_font, category_font, value_font, modal_font, button_font, score_font, team_font, team_bold_font, turn_font
 
     # Calcular tamaños de fuente basados en la altura de la ventana
     base_size = HEIGHT // 20
@@ -89,6 +90,7 @@ def initialize_fonts():
     button_font = pygame.font.SysFont("Arial", max(int(base_size // 1.8), 16))
     score_font = pygame.font.SysFont("Arial", max(int(base_size // 1.2), 20), bold=True)
     team_font = pygame.font.SysFont("Arial", max(int(base_size // 2.2), 14))
+    team_bold_font = pygame.font.SysFont("Arial", max(int(base_size // 2.2), 14), bold=True)  # NUEVA: Fuente en negrita
     turn_font = pygame.font.SysFont("Arial", max(int(base_size // 2.2), 14), bold=True)
 
 
@@ -237,7 +239,7 @@ questions_data = {
         },
         {
             "question": "Según Big Think (2024), ¿de qué depende la innovación en un cluster?",
-            "answer": "De la interacción social, cultural y académica, no del “genio solitario”",
+            "answer": "De la interacción social, cultural y académica, no del \"genio solitario\"",
         },
     ],
 }
@@ -617,7 +619,8 @@ def draw_board():
                 pygame.draw.rect(screen, BLUE_MEDIUM, rect, border_radius=5)
                 pygame.draw.rect(screen, GOLD, rect, 2, border_radius=5)
 
-                value_surf = value_font.render(f"${question_values[j]}", True, GOLD)
+                # MODIFICACIÓN: Quitar el signo $ del valor
+                value_surf = value_font.render(str(question_values[j]), True, GOLD)
                 value_rect = value_surf.get_rect(center=rect.center)
                 screen.blit(value_surf, value_rect)
 
@@ -652,11 +655,21 @@ def draw_board():
             pygame.draw.rect(screen, team_colors[i], rect, border_radius=10)
             pygame.draw.rect(screen, WHITE, rect, 2, border_radius=10)
 
+        # MODIFICACIÓN: Mostrar nombre completo del equipo en negrita
         team_name = selected_teams[i]
-        if len(team_name) > 8:
-            team_name = team_name[:8] + "..."
-
-        team_surf = team_font.render(team_name, True, WHITE)
+        
+        # Usar la nueva fuente en negrita para los nombres de equipos
+        team_surf = team_bold_font.render(team_name, True, WHITE)
+        
+        # Ajustar el texto si es demasiado ancho para el cuadro
+        if team_surf.get_width() > team_score_width - 10:
+            # Si el texto es demasiado ancho, reducimos el tamaño de fuente gradualmente
+            temp_font_size = team_bold_font.get_height()
+            while temp_font_size > 10 and team_surf.get_width() > team_score_width - 10:
+                temp_font_size -= 1
+                temp_font = pygame.font.SysFont("Arial", temp_font_size, bold=True)
+                team_surf = temp_font.render(team_name, True, WHITE)
+        
         team_rect = team_surf.get_rect(center=(x + team_score_width // 2, y + 25))
         screen.blit(team_surf, team_rect)
 
@@ -691,9 +704,9 @@ def draw_question():
     # Dibujar temporizador
     draw_timer(screen, modal_rect)
 
-    # Información del turno con más separación superior
+    # MODIFICACIÓN: Quitar el signo $ del valor en la información del turno
     turn_info_text = (
-        f"Turno de: {selected_teams[current_turn]} - Valor: ${current_question_value}"
+        f"Turno de: {selected_teams[current_turn]} - Valor: {current_question_value}"
     )
     turn_info_surf = modal_font.render(turn_info_text, True, YELLOW)
     turn_info_text_rect = turn_info_surf.get_rect(
@@ -778,12 +791,12 @@ def draw_question():
 def assign_points(team_index):
     team_scores[team_index] += current_question_value
     print(
-        f"Puntos asignados a {selected_teams[team_index]}: +${current_question_value}"
+        f"Puntos asignados a {selected_teams[team_index]}: +{current_question_value}"  # MODIFICACIÓN: Quitar $
     )
 
 
 def no_points():
-    print(f"Ningún equipo recibió puntos por esta pregunta (${current_question_value})")
+    print(f"Ningún equipo recibió puntos por esta pregunta ({current_question_value})")  # MODIFICACIÓN: Quitar $
 
 
 def close_question_modal():
@@ -838,6 +851,8 @@ def handle_board_click(pos):
                     question_start_time = time.time()
                     timer_active = True
                     time_expired = False
+
+                    print(f"Pregunta seleccionada: {category_name} - {question_values[j]}")  # MODIFICACIÓN: Quitar $
                     return
 
 
